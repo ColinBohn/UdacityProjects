@@ -1,0 +1,61 @@
+body {
+	font-family: 'Lato', sans-serif;
+}
+
+p {
+	font-size: 24px;
+}
+
+header {
+	border-bottom: 4px #7d97ad solid;
+	margin-bottom: 25px;
+}
+
+.logo {
+	padding-top: 30px;
+}
+
+.title {
+	text-align: right;
+	text-transform: uppercase;
+	
+}
+
+.title-large {
+	font-weight: 100;
+	font-size: 62px;
+	margin-bottom: 0px;
+}
+
+.title-small {
+	font-size: 20px;
+	margin-top: 0px;
+}
+
+.section-intro {
+	color: #7d97ad;
+	margin: 25px 0px;
+}
+
+.apps-showcase {
+	text-align: center;
+}
+
+.img-responsive {
+	margin: 0 auto;
+}
+
+.app-name {
+	text-transform: uppercase;
+	font-size: 36px;
+	color: #2d3c49;
+	margin-bottom: 0px;
+}
+
+.app-link {
+	color: #999;
+}
+
+.app {
+	margin-bottom: 25px;
+}
