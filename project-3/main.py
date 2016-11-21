@@ -7,7 +7,8 @@ from google.appengine.ext import db
 
 # Define our constants
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), 'templates')
-JINJA = jinja2.Environment(loader = jinja2.FileSystemLoader(TEMPLATE_DIR), autoescape = True)
+JINJA = jinja2.Environment(loader = jinja2.FileSystemLoader(TEMPLATE_DIR),
+        autoescape = True)
 
 def render_template_string(template, **params):
     t = JINJA.get_template(template)
@@ -33,11 +34,11 @@ class Post(db.Model):
     
     def render(self):
         self._render_text = self.content.replace('\n', '<br>')
-        render_template_string("post.html", p = self)
+        return render_template_string("post.html", p = self)
     
 class BlogFront(BlogHandler):
     def get(self):
-        posts = Post.all().order('-created') #TODO: How do I add a limit to this?
+        posts = Post.all().order('-created') #TODO: How do I add a limit to this
         self.render('front.html', posts = posts)
         
 class BlogPost(BlogHandler):
@@ -56,7 +57,7 @@ class NewPost(BlogHandler):
         self.render("newpost.html")
         
     def post(self):
-        title = self.request.get('title')
+        title = self.request.get('subject')
         content = self.request.get('content')
         
         if title and content:
