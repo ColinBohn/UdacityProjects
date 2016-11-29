@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap-theme.min.css" />
     <link type="text/css" rel="stylesheet" href="/css/main.css" />
+
     <title>Udacity Project 3 Blog</title>
 </head>
 <body>
-    <a href="/blog" class="main-title">Project 3 Blog</a>
-    <div id="content">
-        {% block content %}
-        {% endblock %}
+    <div class="container">
+        <div class="text-right">
+            {% if logged_in_user %}
+            <a href="/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a><br />
+            <a href="/signup">Signup</a>
+            {% endif %}
+        </div>
+        <div class="page-header">
+            <a href="/blog"><h1>Udacity Project 3 Blog</h1></a>
+        </div>
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
 </body>
 </html>

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Signup</h2>
+<form method="post">
+    <div class="form-group {% if error_username %}has-error{% endif %}">
+        <label class="control-label" for="username">username</label>
+        <input type="text" name="username" value="{{username}}" class="form-control">
+        <span class="text-danger">{{error_username}}</span>
+    </div>
+    <div class="form-group {% if error_password %}has-error{% endif %}">
+        <label class="control-label" for="password">password</label>
+        <input type="password" name="password" value="{{password}}" class="form-control">
+        <span class="text-danger">{{error_password}}</span>
+    </div>
+    <div class="form-group {% if error_verify %}has-error{% endif %}">
+        <label class="control-label" for="verify">verify password</label>
+        <input type="password" name="verify" value="" class="form-control">
+        <span class="text-danger">{{error_verify}}</span>
+    </div>
+    <div class="form-group {% if error_email %}has-error{% endif %}">
+        <label class="control-label" for="email">email (optional)</label>
+        <input type="text" name="email" value="{{email}}" class="form-control">
+        <span class="text-danger">{{error_email}}</span>
+    </div>
+    <input type="submit" class="btn btn-default">
+</form>
+{% endblock %}
+

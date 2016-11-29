@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% if owner %}
+    <div class="text-right">
+        <a href="/blog/edit/{{post.key().id()}}/">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+        </a>
+        <a href="/blog/delete/{{post.key().id()}}/">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+        </a>
+    </div>
+    {% endif %}
     {{post.render() | safe}}
 {% endblock %}
