@@ -11,9 +11,10 @@
     <div class="container">
         <div class="text-right">
             {% if logged_in_user %}
+            <a href="/blog/newpost">New Post</a> |
             <a href="/logout">Logout</a>
             {% else %}
-            <a href="/login">Login</a><br />
+            <a href="/login">Login</a> | 
             <a href="/signup">Signup</a>
             {% endif %}
         </div>

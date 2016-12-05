@@ -249,10 +249,13 @@ class EditPost(PageHandler):
 
         if title and content:
             pd = self.load_post(post_id)
-            pd['post'].title = title
-            pd['post'].content = content
-            pd['post'].put()
-            self.redirect('/blog/%s' % str(pd['post'].key().id()))
+            if pd['owner']:
+                pd['post'].title = title
+                pd['post'].content = content
+                pd['post'].put()
+                self.redirect('/blog/%s' % str(pd['post'].key().id()))
+            else:
+                self.response.out.write("You cannot edit someone else's post!")
 
         else:
             error = "Please enter both a title and content!"
@@ -267,8 +270,7 @@ class DeletePost(PageHandler):
             pd['post'].delete()
             self.redirect('/blog')
         else:
-            self.error(403)
-            
+            self.response.out.write("You cannot delete someone else's post!")
 
 ######
 ### URL ROUTING
