@@ -1,0 +1,18 @@
+application: colin-udacity-project
+version: 2
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /css
+  static_dir: css
+- url: /fonts
+  static_dir: fonts
+- url: /.*
+  script: main.app
+
+
+libraries:
+- name: jinja2
+  version: latest
