@@ -8,29 +8,31 @@ import psycopg2
 
 def connect():
     """Connect to the PostgreSQL database.  Returns a database connection."""
-    return psycopg2.connect("dbname=tournament")
+    try:
+        db = psycopg2.connect("dbname=tournament")
+        cursor = db.cursor()
+        return db, cursor
+    except:
+        print("Could not connect to database.")
 
 
 def deleteMatches():
     """Remove all the match records from the database."""
-    db = connect()
-    c = db.cursor()
-    c.execute("DELETE FROM matches")
+    db, c = connect()
+    c.execute("TRUNCATE TABLE matches")
     db.commit()
 
 
 def deletePlayers():
     """Remove all the player records from the database."""
-    db = connect()
-    c = db.cursor()
-    c.execute("DELETE FROM players")
+    db, c = connect()
+    c.execute("TRUNCATE TABLE players CASCADE")
     db.commit()
 
 
 def countPlayers():
     """Returns the number of players currently registered."""
-    db = connect()
-    c = db.cursor()
+    db, c = connect()
     c.execute("SELECT COUNT(id) FROM players")
     return c.fetchone()[0]
 
@@ -44,8 +46,7 @@ def registerPlayer(name):
     Args:
       name: the player's full name (need not be unique).
     """
-    db = connect()
-    c = db.cursor()
+    db, c = connect()
     c.execute("INSERT INTO players (name) VALUES (%s)", (name,))
     db.commit()
 
@@ -63,8 +64,7 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
-    db = connect()
-    c = db.cursor()
+    db, c = connect()
     c.execute("SELECT * FROM standings")
     return c.fetchall()
 
@@ -76,8 +76,7 @@ def reportMatch(winner, loser):
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
     """
-    db = connect()
-    c = db.cursor()
+    db, c = connect()
     c.execute("INSERT INTO matches (winner, loser) VALUES (%s, %s)",
               (winner, loser))
     db.commit()
@@ -98,8 +97,7 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-    db = connect()
-    c = db.cursor()
+    db, c = connect()
     c.execute("SELECT * FROM standings")
     res = c.fetchall()
     pairings = []
