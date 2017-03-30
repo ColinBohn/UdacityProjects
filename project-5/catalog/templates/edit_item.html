@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Edit {{ item.name }}{% endblock %}
+{% block content %}
+<div class="row box">
+    <div class="col-md-12">
+        <h1>Edit {{ item.name }}</h1>
+        <form action="/edit/item/{{ item.name }}/submit" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" class="form-control" value="{{ item.name }}">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" class="form-control" rows="3">{{ item.description }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select name="category" class="form-control">
+                    {% for c in categories %}
+                    <option value="{{ c.id }}"{% if c.id == item.category.id %} selected{% endif %}>{{ c.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}New Item{% endblock %}
+{% block content %}
+<div class="row box">
+    <div class="col-md-12">
+        <h1>Add new item</h1>
+        <form action="/new/item/submit" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select name="category" class="form-control">
+                    {% for c in categories %}
+                    <option value="{{ c.id }}">{{ c.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

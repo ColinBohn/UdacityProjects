@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="row box">
+    <h3 style="text-align: center;">Press the button below to sign in.</h3>
+    <div class="col-md-2 col-md-offset-5">
+        <div class="g-signin2" id="signin" data-onsuccess="onSignIn" data-theme="dark"></div>
+    </div>
+</div>
+<script>
+    document.getElementById("signin").style.display = "";
+  function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/oauth2callback');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+      console.log('Signed in as: ' + xhr.responseText);
+    };
+    xhr.send('idtoken=' + id_token);
+    setTimeout(function() {window.location = "/"}, 250);
+  };
+</script>
+{% endblock %}

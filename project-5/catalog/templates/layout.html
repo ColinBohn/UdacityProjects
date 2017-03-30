@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="{{ gcid }}">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} - Catalog</title>
+    <style>
+        body {
+            background-color: #aaa;
+            margin-top: 20px;
+        }
+        .box {
+            background-color: #fff;
+            border-radius: 3px;
+            margin-top: 50px;
+            padding: 10px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <nav class="navbar navbar-inverse">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Catalog App</a>
+                <ul class="nav navbar-nav">
+                    {% if logged_in %}
+                    <li><a href="/logout">Logout</a></li>
+                    {% else %}
+                    <li><a href="/login">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+  </body>
+</html>

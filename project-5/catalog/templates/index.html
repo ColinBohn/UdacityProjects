@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Recent Items{% endblock %}
+{% block content %}
+<div class="row box">
+    <div class="col-sm-4">
+        <h1>Categories</h1>
+        <div class="list-group">
+            {% for c in categories %}
+            <a class="list-group-item" href="/catalog/{{ c.name }}/items">{{ c.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <h1>Latest Items</h1>
+        {% if logged_in %}
+        <a href="/new/item/"><b>Add item</b></a>
+        {% endif %}
+        <ul class="list-unstyled">
+        {% for i in items %}
+        <li><a href="/catalog/{{ i.category.name }}/{{ i.name }}">{{ i.name }}</a> ({{ i.category.name }})</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

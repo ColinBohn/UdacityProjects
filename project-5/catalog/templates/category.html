@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block content %}
+<div class="row box">
+    <div class="col-sm-4">
+        <h1>Categories</h1>
+        <div class="list-group">
+            {% for c in categories %}
+            <a class="list-group-item" href="/catalog/{{ c.name }}/items">{{ c.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <h1>{{ category.name }} Items ({{ items|length }} items)</h1>
+        <ul class="list-unstyled">
+        {% for i in items %}
+        <li><a href="/catalog/{{ i.category.name }}/{{ i.name }}">{{ i.name }}</a> ({{ i.category.name }})</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

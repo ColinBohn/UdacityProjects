@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block title %}{{ item.name }}{% endblock %}
+{% block content %}
+<div class="row box">
+    <div class="col-md-12">
+        <h1>{{item.name}}</h1>
+        <p><strong>Description:</strong> {{item.description}}</p>
+        {% if logged_in %}
+        <a href="/edit/item/{{ item.name }}">Edit</a> | <a href="/delete/item/{{ item.name }}">Delete</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
