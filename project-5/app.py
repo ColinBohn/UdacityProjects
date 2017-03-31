@@ -16,7 +16,6 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 google_client_id = "702305718162-pkoufeo9l51m6rj29sed66h7hbtmm5c0.apps."\
                    "googleusercontent.com"
-google_secret = "NZLo8q-nVfu-vsm-6g-ApXvK"
 
 
 def app_template(tmpl_name, **kwargs):
@@ -134,16 +133,19 @@ def editItem(item_name):
 @login_required
 def deleteItemForm(item_name):
     """Displays a confirmation to delete an item"""
-    # TODO
-    return None
+    item = session.query(Item).filter_by(name=item_name).one()
+    return app_template('delete_item.html', item=item)
 
 
 @app.route('/delete/item/<string:item_name>/submit')
 @login_required
 def deleteItem(item_name):
     """Receives POST to delete item"""
-    # TODO
-    return None
+    item = session.query(Item).filter_by(name=item_name).one()
+    session.delete(item)
+    session.flush()
+    flash('Item successfully deleted!', 'success')
+    return redirect(url_for('index'))
 
 
 @app.route('/catalog.json')
@@ -154,4 +156,4 @@ def json():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=80)
+    app.run(host="0.0.0.0", port=5000)

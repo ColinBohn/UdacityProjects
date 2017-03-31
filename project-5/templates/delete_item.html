@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Delete {{item.name}}{% endblock %}
+{% block content %}
+<div class="row box" style="text-align: center;">
+    <h3>Are you sure you want to delete {{item.name}}?</h3>
+    <div class="col-md-2 col-md-offset-5">
+        <a class="btn btn-danger" href="/delete/item/{{item.name}}/submit">Delete</a>
+    </div>
+</div>
+{% endblock %}
