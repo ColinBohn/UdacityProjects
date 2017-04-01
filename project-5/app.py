@@ -102,7 +102,7 @@ def newItem():
                 description=request.form["description"],
                 category_id=request.form["category"])
     session.add(item)
-    session.flush()
+    session.commit()
     flash('Item successfully added!', 'success')
     return redirect(url_for('index'))
 
@@ -124,7 +124,7 @@ def editItem(item_name):
     item.name = request.form["name"]
     item.description = request.form["description"]
     item.category_id = request.form["category"]
-    session.flush()
+    session.commit()
     flash('Item successfully edited!', 'success')
     return redirect(url_for('index'))
 
@@ -143,7 +143,7 @@ def deleteItem(item_name):
     """Receives POST to delete item"""
     item = session.query(Item).filter_by(name=item_name).one()
     session.delete(item)
-    session.flush()
+    session.commit()
     flash('Item successfully deleted!', 'success')
     return redirect(url_for('index'))
 

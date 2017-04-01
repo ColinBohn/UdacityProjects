@@ -6,7 +6,8 @@ This project is a catalog app that displays items within categories. It supports
 
 1. Download and install [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 2. Download and install [Vagrant](https://www.vagrantup.com/downloads.html).
-3. Download the [Udacity VM](https://github.com/udacity/fullstack-nanodegree-vm/) and launch `vagrant up`
-4. Move the files from this project into `/vagrant/catalog`
+3. Launch Vagrant with `vagrant up`
 5. Connect into the VM `vagrant ssh`
-6. Install dependencies `pip install -r requirements.txt`
+6. Change directories with `cd /vagrant`
+7. Run server with `python app.py`
+8. Connect to the website at `localhost:5000`
