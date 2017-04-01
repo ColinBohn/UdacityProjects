@@ -8,3 +8,4 @@ Projects:
 2. Portfolio Project - Responsive portfolio website based on mockup
 3. Multi-User Blog - Blogging website built for Google App Engine
 4. Tournament DB - A SQL database and Python interface for a tournament
+5. Catalog App - A SQL-backed web app for listing items within categories
