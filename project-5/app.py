@@ -106,7 +106,8 @@ def newItem():
     """Receives POST for new item"""
     item = Item(name=request.form["name"],
                 description=request.form["description"],
-                category_id=request.form["category"])
+                category_id=request.form["category"],
+                user_id=login_session['id'])
     session.add(item)
     session.commit()
     flash('Item successfully added!', 'success')
