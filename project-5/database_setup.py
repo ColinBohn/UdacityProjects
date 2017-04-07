@@ -11,6 +11,8 @@ class User(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
+    google_id = Column(String(80), nullable=False, unique=True)
+    items = relationship("Item")
 
 
 class Category(Base):
@@ -27,7 +29,6 @@ class Category(Base):
             'id': self.id,
             'name': self.name,
             'Items' : [item.serialize for item in self.items]
-
         }
 
 class Item(Base):
@@ -38,6 +39,8 @@ class Item(Base):
     description = Column(String(2000))
     category_id = Column(Integer, ForeignKey('categories.id'))
     category = relationship(Category)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    user = relationship(User)
 
     @property
     def serialize(self):

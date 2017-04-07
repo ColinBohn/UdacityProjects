@@ -58,7 +58,12 @@ def processLogin():
             raise crypt.AppIdentityError("Wrong issuer.")
     except crypt.AppIdentityError:
         return "Authentication error."
-    login_session['id'] = idinfo['sub']
+    user = session.query(User).filter_by(google_id=idinfo['sub']).first()
+    if not user:
+        user = User(google_id = idinfo['sub'])
+        session.add(user)
+        session.commit()
+    login_session['id'] = user.id
     return "valid"
 
 
@@ -83,7 +88,8 @@ def showCategory(category_name):
 def showItem(category_name, item_name):
     """Returns the description of an item"""
     item = session.query(Item).filter_by(name=item_name).one()
-    return app_template('item.html', item=item)
+    return app_template('item.html', item=item, 
+                        is_owner=item.user.id is login_session['id'])
 
 
 @app.route('/new/item/')
@@ -121,11 +127,14 @@ def editItemForm(item_name):
 def editItem(item_name):
     """Receives POST for edit item"""
     item = session.query(Item).filter_by(name=item_name).one()
-    item.name = request.form["name"]
-    item.description = request.form["description"]
-    item.category_id = request.form["category"]
-    session.commit()
-    flash('Item successfully edited!', 'success')
+    if item.user.id is not login_session['id']:
+        flash ('You do not have permission to edit this item!', 'danger')
+    else:
+        item.name = request.form["name"]
+        item.description = request.form["description"]
+        item.category_id = request.form["category"]
+        session.commit()
+        flash('Item successfully edited!', 'success')
     return redirect(url_for('index'))
 
 
@@ -142,9 +151,12 @@ def deleteItemForm(item_name):
 def deleteItem(item_name):
     """Receives POST to delete item"""
     item = session.query(Item).filter_by(name=item_name).one()
-    session.delete(item)
-    session.commit()
-    flash('Item successfully deleted!', 'success')
+    if item.user.id is not login_session['id']:
+        flash ('You do not have permission to edit this item!', 'danger')
+    else:
+        session.delete(item)
+        session.commit()
+        flash('Item successfully deleted!', 'success')
     return redirect(url_for('index'))
 
 
