@@ -1,0 +1,19 @@
+{
+  "name": "neighborhoodmap",
+  "version": "1.0.0",
+  "description": "Udacity FSND project",
+  "main": "index.js",
+  "dependencies": {
+    "bulma": "^0.4.4",
+    "font-awesome": "^4.7.0",
+    "gulp": "^3.9.1",
+    "jquery": "^3.2.1",
+    "knockout": "^3.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Colin Bohn",
+  "license": "MIT"
+}

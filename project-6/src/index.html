@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Neighborhood Map</title>
+    <meta name="description" content="It's a map, yo.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+        
+    <link href="css/bulma.css" type="text/css" rel="stylesheet">
+    <link href="css/font-awesome.css" type="text/css" rel="stylesheet">
+    <style>
+	    body { margin: 0; padding: 0; height: 100%;}
+	    #map { background-color: #ddd; min-height: 400px; }
+        #sidebar { background-color: #ccc; box-shadow: inset 0px 4px 4px 0px #444; height: 100%; overflow-y: scroll; }
+	    #app { height: 100%; width:100%; padding: 0; margin: 0; }
+	</style>   
+</head>
+<body>
+	<div id="app" class="columns is-gapless">
+		<div id="map" class="column is-three-quarters">
+			<h1>Google Maps is loading.</h1>
+			<span>Not loading? Make sure JavaScript is enabled.</span>
+		</div>
+		<div id="sidebar" class="column">
+            <nav class="panel">
+                <p class="panel-heading">
+                    locations
+                </p>
+                <div class="panel-block">
+                    <p class="control has-icons-left">
+                        <input class="input is-small" type="text" placeholder="search" data-bind="textInput: search, valueUpdate: 'afterkeydown'">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </p>
+                </div>
+                <div data-bind="foreach: filteredLocations">
+                    <a class="panel-block" data-bind="css: { 'is-active': selected }, click: $parent.click">
+                        <span class="panel-icon">
+                            <i class="fa fa-map-marker"></i>
+                        </span>
+                        <span data-bind="text: name"></span>
+                    </a>
+                </div>
+                <div class="card" data-bind="text: textbox"></div>
+                <small class="is-size-7">Summary text from Wikipedia</small>
+            </nav>
+		</div>
+	</div>
+</body>
+<script src='js/knockout-latest.js' defer></script>
+<script src='js/jquery.js' defer></script>
+<script src='js/app.js' defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh8XLwGat5v9XoDcEnzt_rQfS9F5B1XWM&callback=startApp&libraries=places" async defer></script>
+
+</html>
+
