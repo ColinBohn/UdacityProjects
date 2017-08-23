@@ -9,3 +9,4 @@ Projects:
 3. Multi-User Blog - Blogging website built for Google App Engine
 4. Tournament DB - A SQL database and Python interface for a tournament
 5. Catalog App - A SQL-backed web app for listing items within categories
+6. Neighborhood Map - A JavaScript web app that maps points of interest

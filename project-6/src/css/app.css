@@ -1,0 +1,27 @@
+html {
+    height: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+#map {
+	background-color: #ddd;
+	min-height: 400px;
+}
+
+#sidebar {
+	background-color: #ccc;
+	height: 100%;
+	overflow: scroll;
+}
+
+#app {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}

@@ -1,8 +1,10 @@
 var gulp = require('gulp');
 
+// Run all tasks by default
 gulp.task('default', ['css', 'js', 'icons', 'html']);
 
 
+// Move index.html
 gulp.task('html', function() {
     return gulp.src('src/index.html')
         .pipe(gulp.dest('dist'));
@@ -10,7 +12,7 @@ gulp.task('html', function() {
 
 // Copy to css/
 gulp.task('css', function() {
-	return gulp.src(['node_modules/bulma/css/bulma.css', 'node_modules/font-awesome/css/font-awesome.css'])
+	return gulp.src(['node_modules/bulma/css/bulma.css', 'node_modules/font-awesome/css/font-awesome.css', 'src/css/app.css'])
 		.pipe(gulp.dest('dist/css'));
 });
 
@@ -20,6 +22,7 @@ gulp.task('js', function() {
 		.pipe(gulp.dest('dist/js'));
 });
 
+// Copy to fonts/
 gulp.task('icons', function() {
     return gulp.src('node_modules/font-awesome/fonts/**.*')
         .pipe(gulp.dest('dist/fonts'));
